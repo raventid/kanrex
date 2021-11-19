@@ -6,12 +6,13 @@ defmodule Kanrex do
   """
 
   @doc """
-  Hello world.
+  Kanrex reference.
 
-  ## Examples
 
-      iex> Kanrex.hello()
-      :world
+  ## Create var
+
+      iex> Kanrex.var(true)
+      %Kanrex.Var{id: true}
 
   """
   defmodule Var do
@@ -54,7 +55,7 @@ defmodule Kanrex do
       {%Var{id: id}, %Var{id: id}} -> s
       {%Var{}, _} -> Map.put(s, u, v)
       {_, %Var{}} -> Map.put(s, v, u)
-      {[u_car|u_cdr], [v_car|v_cdr]} ->
+      {[u_car | u_cdr], [v_car | v_cdr]} ->
         s = unify(u_car, v_car, s)
         s && unify(u_cdr, v_cdr, s)
       _ -> u === v && s

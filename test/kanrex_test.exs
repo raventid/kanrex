@@ -66,8 +66,12 @@ defmodule KanrexTest do
 
   defp map_contains_var() do
     r = Enum.random(2..8)
-    k = Kanrex.var(r-1)
-    v = Kanrex.var(r+1)
+
+    {k,v} = if 1 === Enum.random(1..5) do
+      { [], [] }
+    else
+      { Kanrex.var(r-1), Kanrex.var(r+1) }
+    end
 
     map = 1..r
     |> Enum.reduce(

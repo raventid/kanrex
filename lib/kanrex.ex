@@ -98,4 +98,13 @@ defmodule Kanrex do
       goal.(%State{state | id_counter: id + 1})
     end
   end
-end
+
+  # (define ( mplus $1 $2)
+  #   ( cond
+  #     ( ( null? $1) $2)
+  #     ( ( procedure? $1) ( λ$() ( mplus $2 ( $1) ) ) )
+  #     ( else ( cons ( car $1) ( mplus (cdr $1) $2) ) ) ) )
+  def mplus(u, v) do
+    Enum.concat(u, v)
+  end
+ end

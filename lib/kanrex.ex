@@ -91,7 +91,7 @@ defmodule Kanrex do
   end
 
   # fun - (var -> goal)
-  def call_with_fresh(fun) do
+  def call_fresh(fun) do
     fn state ->
       id = Map.get(state, :id_counter)
       goal = fun.(var(id))

@@ -80,7 +80,7 @@ defmodule Kanrex do
   # u - term
   # v - term
   def eqo(u, v) do
-    fn state ->
+    fn(state) ->
       s = unify(u, v, Map.get(state, :substitution))
       if s do
         [%State{state | substitution: s}]
@@ -90,9 +90,9 @@ defmodule Kanrex do
     end
   end
 
-  # fun - (var -> goal)
+  # fun - var -> (var -> goal)
   def call_fresh(fun) do
-    fn state ->
+    fn(state) ->
       id = Map.get(state, :id_counter)
       goal = fun.(var(id))
       goal.(%State{state | id_counter: id + 1})
@@ -105,6 +105,13 @@ defmodule Kanrex do
   #     ( ( procedure? $1) ( λ$() ( mplus $2 ( $1) ) ) )
   #     ( else ( cons ( car $1) ( mplus (cdr $1) $2) ) ) ) )
   def mplus(u, v) do
-    Enum.concat(u, v)
+    Stream.concat(u, v)
+  end
+
+  # state stream, goal -> state stream
+  def bind(s, g) do
+    s
+    |> Stream.map(g)
+    |> Stream.concat
   end
  end

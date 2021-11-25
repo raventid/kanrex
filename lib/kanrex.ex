@@ -114,4 +114,11 @@ defmodule Kanrex do
     |> Stream.map(g)
     |> Stream.concat
   end
+
+  def display_closure(fun, nil) do
+    fun.(empty_state())
+  end
+  def display_closure(fun, initial_state) do
+    fun.(initial_state)
+  end
  end

@@ -115,8 +115,8 @@ defmodule Kanrex do
     |> Stream.concat
   end
 
-  def disj(a, b), do: fn(s) -> Kanrex.mplus(a.(s), b.(s)) end
-  def conj(a, b), do: fn(s) -> Kanrex.bind(a.(s), b) end
+  def disj(u, v), do: fn(s) -> Kanrex.mplus(u.(s), v.(s)) end
+  def conj(u, v), do: fn(s) -> Kanrex.bind(u.(s), v) end
 
   def display_closure(fun, nil) do
     IO.inspect(fun.(empty_state()))
